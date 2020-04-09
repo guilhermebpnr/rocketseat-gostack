@@ -2,6 +2,25 @@
 
 Immersive training in Node.js, React and React Native.
 
+
+**Table of Contents**
+- [Rocketseat GoStack Bootcamp](#rocketseat-gostack-bootcamp)
+  - [Getting started](#getting-started)
+    - [Learning](#learning)
+    - [Personal Projects](#personal-projects)
+  - [Development Environment](#development-environment)
+  - [Level 1](#level-1)
+    - [Backend with Node.js](#backend-with-nodejs)
+    - [Rest API Fundamentals](#rest-api-fundamentals)
+    - [Creating a Node project](#creating-a-node-project)
+    - [Adding routes](#adding-routes)
+    - [Configuring Nodemon](#configuring-nodemon)
+    - [Using Insomnia](#using-insomnia)
+    - [Parameter Types](#parameter-types)
+    - [Middleware](#middleware)
+  - [Useful Imports](#useful-imports)
+  - [Useful Methods](#useful-methods)
+
 ## Getting started
 
 ### Learning 
@@ -282,7 +301,7 @@ app.post('/resources', (request, response) => {
 })
 ```
 
-## Middleware
+### Middleware
 
 The concept of Middleware is an essential part of the Express framework. It is basically a request interceptor. It's a function that takes a `request`, a `response` and a `next` as parameters and, thus, has the following format:
 
@@ -294,23 +313,23 @@ function myMiddleware(request, response, next) {
 
 A middleware can completely interrupt a request or it can alter data from the request and return a response. It can also call the next middleware to be executed.
 
-### Calling a Middleware
+#### Calling a Middleware
 
 Once defined, a middleware can be called in two ways.
 
-#### Globaly
+##### Globaly
 
 ```js
 app.use(myMiddleware);
 ```
 
-#### Targeted
+##### Targeted
 
 ```js
 app.use('/route', myMiddleware);
 ```
 
-#### Locally
+##### Locally
 
 ```js
 app.get('/route', myMiddleware1, myMiddleware2, ... , (request, response) => { ... });
@@ -318,7 +337,7 @@ app.get('/route', myMiddleware1, myMiddleware2, ... , (request, response) => { .
 
 As suggested, the methods called in the HTTP routing methods (*.get, .post, .put*, etc.) are themselves middlewares.
 
-### Passing on the execution
+#### Passing on the execution
 
 ```js
 function myMiddleware(request, response, next) {
@@ -327,7 +346,7 @@ function myMiddleware(request, response, next) {
 }
 ```
 
-### Interrupting the execution inside the Middleware
+#### Interrupting the execution inside the Middleware
 
 ```js
 function myMiddleware(request, response, next) {
