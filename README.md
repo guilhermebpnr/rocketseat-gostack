@@ -72,6 +72,7 @@ Immersive training in Node.js, React and React Native.
   - HTTP Headers
 - PUT /users/:id
   - Request body
+- PATCH
 - DELETE /users/:id
 
 #### Benefits
@@ -94,3 +95,199 @@ Immersive training in Node.js, React and React Native.
   - 404: Not Found
 - 5xx: Server Error
   - 500: Internal Server Error
+
+### Creating a Node project
+
+1. Initialise the project folder: 
+   ```shell
+   $ yarn init -y
+   ```
+2. Create basic folder structure
+    ```shell
+    /src
+        /index.js
+    /package.json
+    ``` 
+3. Add the Express framework: `$ yarn add express`
+   - Manages routes and middleware
+4. Add Express framework to the app
+   ```js
+   const express = require('express');
+   const app = express();
+   app.listen(3333, () => {
+    console.log('Backend started.')
+   });
+   ```
+5. Execute the app: 
+   ```shell
+   $ node src/index.js
+   ```
+### Adding routes
+
+#### GET
+
+Text:
+
+```js
+app.get('/projects', (request, response) => {
+    return response.send('Hello World');
+})
+```
+
+Json object:
+
+```javascript
+app.get('/', (request, response) => {
+    return response.json({ 
+        message: 'Hello World',
+    });
+})
+```
+
+### Configuring Nodemon
+
+Nodemon is a utility that will monitor for any changes in your source and automatically restart your server.
+
+```shell
+$ yarn add nodemon -D`
+```
+
+- -D adds it as a development dependency
+
+#### Executing it
+
+```shell
+$ yarn nodemon src/index.js
+```
+
+or
+
+1. Add this to *package.json*:
+   ```json
+   "scripts": {
+       "dev": "nodemon src/index.js"
+   },
+   ```
+2. Execute it: `yarn dev`
+
+Alternatively, 
+
+1. Change 
+   
+   ```json
+   "main": "index.js",
+   ```
+
+   to 
+   
+   ```json
+   "main": "src/index.js",
+   ```
+
+2. And add
+
+   ```json
+   "scripts": {
+       "dev": "nodemon"
+   },
+   ```
+
+    as nodemon will execute the *main* file by default.
+
+### Using Insomnia
+
+#### Adding environments
+
+1. Click on **No Environment**
+2. Click on 🔧**Manage Environments**
+3. Beside **Sub Environments**, click on the ➕ icon and then choose 👁**Environment**
+4. In the editor, add a variable in the JSON format, like:
+    ```json
+    {
+       "base_url": "http://localhost:3333"
+    }
+    ```
+5. Close the **Manage Environments** window
+6. Click inside the URL field and type **Ctrl+Space**
+7. Select the variable that was just created
+
+### Parameter Types
+
+#### Query params
+
+Used for filtering and paging, e.g.
+  
+```json
+?name=value&name1=value1
+```
+
+> Tip: Inside Insomnia, we can use the *Query* tab.
+
+To retrieve the arguments inside the app:
+
+```js
+app.get('/resource', (request, response) => {
+    const queryParams = request.query;
+    console.log(queryParams);
+    // Request URL:
+    // http://localhost:3333/resource?name=value&name1=value1
+    // Output:
+    // { name: 'value', name1: 'value1' }
+    
+    const { name, name1 } = request.query;
+    console.log(name);
+    console.log(name1);
+    // Output:
+    // value
+    // value1
+});
+```
+
+#### Route params
+
+Used to identify resources when updating or deleting them.
+
+```js
+app.put('/resources/:id', (request, response) => {
+    const routeParams = request.params;
+    const { id } = request.params;
+    console.log(routeParams);
+    console.log(id);
+
+    // URL: http://localhost:3333/resource/1
+    // Output:
+    // { id: 1 }
+    // 1
+});
+```
+
+#### Request body
+
+Used to send the content when creating or editing a resource by sending a JSON object.
+
+In order to use this with Express, the following must be added before the routes declarations:
+
+```js
+app.use(express.json());
+```
+
+To test it in Insomnia, pick the *post*/*put* method, for example, as the HTTP request method and them pick *JSON* as the **Body** type, and insert a JSON object with fields corresponding to the resource to be created/updated.
+
+The *body* that was sent inside the HTTP request can then be retrieved like so:
+
+```js
+app.post('/resources', (request, response) => {
+    const body = request.body;
+    // body will be an object containing all the properties defined in the JSON object that was passed
+})
+```
+
+## Useful Imports
+
+```js
+const { uuid } = require('uuidv4');
+```
+
+## Useful Methods
+
+- [str.includes(searchString[, position])](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
