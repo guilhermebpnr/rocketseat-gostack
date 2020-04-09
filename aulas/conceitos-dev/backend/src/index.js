@@ -1,9 +1,27 @@
 const express = require('express');
-const { uuid } = require('uuidv4');
+const { uuid, isUuid } = require('uuidv4');
 
 const app = express();
-
 app.use(express.json());
+
+const logResquests = (request, response, next) => {
+    const { method, url } = request;
+    console.log(method.toUpperCase(), url);
+    return next();
+}
+
+const validateProjectId = (request, response, next) => {
+    const { id } = request.params;
+
+    if (!isUuid(id)) {
+        return response.json({ error: 'The project ID is invalid.' });
+    }
+
+    return next();
+}
+
+app.use(logResquests);
+app.use('/projects/:id', validateProjectId);
 
 const projects = [];
 
