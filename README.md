@@ -5,25 +5,52 @@ Immersive training in Node.js, React and React Native.
 
 **Table of Contents**
 - [Rocketseat GoStack Bootcamp](#rocketseat-gostack-bootcamp)
-  - [Getting started](#getting-started)
-    - [Learning](#learning)
-    - [Personal Projects](#personal-projects)
-  - [Development Environment](#development-environment)
-  - [Level 1](#level-1)
-    - [Backend with Node.js](#backend-with-nodejs)
-    - [Rest API Fundamentals](#rest-api-fundamentals)
-    - [Creating a Node project](#creating-a-node-project)
-    - [Adding routes](#adding-routes)
-    - [Configuring Nodemon](#configuring-nodemon)
-    - [Using Insomnia](#using-insomnia)
-    - [Parameter Types](#parameter-types)
-    - [Middleware](#middleware)
+- [Getting started](#getting-started)
+  - [Learning](#learning)
+  - [Personal Projects](#personal-projects)
+- [Development Environment](#development-environment)
+- [Level 1.1 - Backend with Node.js](#level-11---backend-with-nodejs)
+    - [NPM and Yarn](#npm-and-yarn)
+    - [Node Frameworks](#node-frameworks)
+  - [Rest API Fundamentals](#rest-api-fundamentals)
+    - [How does it work?](#how-does-it-work)
+    - [HTTP Methods](#http-methods)
+    - [Benefits](#benefits)
+    - [HTTP Codes](#http-codes)
+  - [Creating a Node project](#creating-a-node-project)
+  - [Adding routes](#adding-routes)
+    - [GET](#get)
+  - [Configuring Nodemon](#configuring-nodemon)
+    - [Executing it](#executing-it)
+  - [Using Insomnia](#using-insomnia)
+    - [Adding environments](#adding-environments)
+  - [Parameter Types](#parameter-types)
+    - [Query params](#query-params)
+    - [Route params](#route-params)
+    - [Request body](#request-body)
+  - [Middleware](#middleware)
+    - [Calling a Middleware](#calling-a-middleware)
+    - [Passing on the execution](#passing-on-the-execution)
+    - [Interrupting the execution inside the Middleware](#interrupting-the-execution-inside-the-middleware)
   - [Useful Imports](#useful-imports)
   - [Useful Methods](#useful-methods)
+- [Level 1.2 - Frontend with ReactJS](#level-12---frontend-with-reactjs)
+  - [Initialising the project](#initialising-the-project)
+    - [Create folder structure](#create-folder-structure)
+    - [Add React Modules](#add-react-modules)
+  - [Webpack, Babel and Loaders](#webpack-babel-and-loaders)
+    - [Configuring Babel](#configuring-babel)
+    - [Running Babel CLI](#running-babel-cli)
+    - [Configuring Webpack](#configuring-webpack)
+    - [Running Webpack](#running-webpack)
+    - [Installing Webpack Development Server](#installing-webpack-development-server)
+    - [Running Webpack Development Server](#running-webpack-development-server)
+  - [Components](#components)
+    - [Hello World](#hello-world)
 
-## Getting started
+# Getting started
 
-### Learning 
+## Learning 
 
 - Take notes
 - Don't skip any steps
@@ -32,22 +59,20 @@ Immersive training in Node.js, React and React Native.
 - Teach someone next to you
 - Write about what you've learnt, like a blog post
 
-### Personal Projects
+## Personal Projects
 
 - Watch for the needs of people next to you
 - Make a clone of an interesting app
 - Get some [inspiration here](https://github.com/florinpop17/app-ideas)
 - Publish your app ASAP
 
-## Development Environment
+# Development Environment
 
 - VS Code
 - React Developer Tools for Chrome
 
 
-## Level 1
-
-### Backend with Node.js
+# Level 1.1 - Backend with Node.js
 
 - Implementation of business rules
 - Integration with third-parties
@@ -60,13 +85,13 @@ Immersive training in Node.js, React and React Native.
   - C++ based multi-threading
 - Non-blocking I/O: the end of the request/response processing does not end the connection. It depends on the WebSocket protocol
 
-#### NPM and Yarn
+### NPM and Yarn
 
 - Package managers for installing third-party libraries
 - Yarn is faster and more functional
   - Yarn workspaces for sharing libraries among projects
 
-#### Node Frameworks
+### Node Frameworks
 
 - ExpressJS
   - Unopiniated
@@ -74,15 +99,15 @@ Immersive training in Node.js, React and React Native.
 - AdonisJS and NestJS
   - Opiniated frameworks
 
-### Rest API Fundamentals
+## Rest API Fundamentals
 
-#### How does it work?
+### How does it work?
 
 - Client makes a request
 - Server returns a data structure as a response
 - Client receives the response and processes it as needed
 
-#### HTTP Methods
+### HTTP Methods
 
 - GET /users
 - GET /users/:id
@@ -94,12 +119,12 @@ Immersive training in Node.js, React and React Native.
 - PATCH
 - DELETE /users/:id
 
-#### Benefits
+### Benefits
 
 - Multiple clients to the same service
 - Standardized communication
 
-#### HTTP Codes
+### HTTP Codes
 
 - 1xx: Informational
 - 2xx: Success
@@ -115,7 +140,7 @@ Immersive training in Node.js, React and React Native.
 - 5xx: Server Error
   - 500: Internal Server Error
 
-### Creating a Node project
+## Creating a Node project
 
 1. Initialise the project folder: 
    ```shell
@@ -141,9 +166,9 @@ Immersive training in Node.js, React and React Native.
    ```shell
    $ node src/index.js
    ```
-### Adding routes
+## Adding routes
 
-#### GET
+### GET
 
 Text:
 
@@ -163,7 +188,7 @@ app.get('/', (request, response) => {
 })
 ```
 
-### Configuring Nodemon
+## Configuring Nodemon
 
 Nodemon is a utility that will monitor for any changes in your source and automatically restart your server.
 
@@ -173,7 +198,7 @@ $ yarn add nodemon -D`
 
 - -D adds it as a development dependency
 
-#### Executing it
+### Executing it
 
 ```shell
 $ yarn nodemon src/index.js
@@ -213,9 +238,9 @@ Alternatively,
 
     as nodemon will execute the *main* file by default.
 
-### Using Insomnia
+## Using Insomnia
 
-#### Adding environments
+### Adding environments
 
 1. Click on **No Environment**
 2. Click on 🔧**Manage Environments**
@@ -230,9 +255,9 @@ Alternatively,
 6. Click inside the URL field and type **Ctrl+Space**
 7. Select the variable that was just created
 
-### Parameter Types
+## Parameter Types
 
-#### Query params
+### Query params
 
 Used for filtering and paging, e.g.
   
@@ -262,7 +287,7 @@ app.get('/resource', (request, response) => {
 });
 ```
 
-#### Route params
+### Route params
 
 Used to identify resources when updating or deleting them.
 
@@ -280,7 +305,7 @@ app.put('/resources/:id', (request, response) => {
 });
 ```
 
-#### Request body
+### Request body
 
 Used to send the content when creating or editing a resource by sending a JSON object.
 
@@ -301,7 +326,7 @@ app.post('/resources', (request, response) => {
 })
 ```
 
-### Middleware
+## Middleware
 
 The concept of Middleware is an essential part of the Express framework. It is basically a request interceptor. It's a function that takes a `request`, a `response` and a `next` as parameters and, thus, has the following format:
 
@@ -313,23 +338,23 @@ function myMiddleware(request, response, next) {
 
 A middleware can completely interrupt a request or it can alter data from the request and return a response. It can also call the next middleware to be executed.
 
-#### Calling a Middleware
+### Calling a Middleware
 
 Once defined, a middleware can be called in two ways.
 
-##### Globaly
+#### Globaly
 
 ```js
 app.use(myMiddleware);
 ```
 
-##### Targeted
+#### Targeted
 
 ```js
 app.use('/route', myMiddleware);
 ```
 
-##### Locally
+#### Locally
 
 ```js
 app.get('/route', myMiddleware1, myMiddleware2, ... , (request, response) => { ... });
@@ -337,7 +362,7 @@ app.get('/route', myMiddleware1, myMiddleware2, ... , (request, response) => { .
 
 As suggested, the methods called in the HTTP routing methods (*.get, .post, .put*, etc.) are themselves middlewares.
 
-#### Passing on the execution
+### Passing on the execution
 
 ```js
 function myMiddleware(request, response, next) {
@@ -346,7 +371,7 @@ function myMiddleware(request, response, next) {
 }
 ```
 
-#### Interrupting the execution inside the Middleware
+### Interrupting the execution inside the Middleware
 
 ```js
 function myMiddleware(request, response, next) {
@@ -372,3 +397,145 @@ const { uuid, isUuid } = require('uuidv4');
 ## Useful Methods
 
 - [str.includes(searchString[, position])](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
+
+# Level 1.2 - Frontend with ReactJS
+
+## Initialising the project
+
+```shell
+$ yarn init -y
+```
+
+### Create folder structure
+
+```
+/public
+  index.html
+/src
+  index.js
+package.json
+babel.config.js
+```
+
+### Add React Modules
+
+```shell
+$ yarn add react react-dom
+```
+
+React DOM must be added when developing web apps.
+
+## Webpack, Babel and Loaders
+
+babel-loader, css-loader, image-loader...
+
+```shell
+$ yarn add @babel/core @babel/preset-env @babel/preset-react @babel/cli babel-loader webpack webpack-cli
+```
+
+### Configuring Babel
+
+> [Babel](http://www.babeljs.io) > Docs > Configuring Babel
+
+babel.config.js
+
+```js
+module.exports = {
+  presets: [
+    '@babel/preset-env',
+    '@babel/preset-react'
+  ]
+}
+```
+
+### Running Babel CLI
+
+```shell
+$ yarn babel file.js --out-file file2.js
+```
+
+### Configuring Webpack
+
+webpack.config.js
+
+```js
+const path = require('path');
+
+module.exports = {
+  entry: {
+    path: path.resolve(__dirname, 'src', 'index.js'),
+  },
+  output: {
+    path: path.resolve(__dirname, 'public'),
+    filename: 'bundle.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
+      }
+    ]
+  },
+};
+```
+
+### Running Webpack
+
+```shell
+$ yarn webpack [--mode development]
+```
+
+### Installing Webpack Development Server
+
+```shell
+$ yarn add webpack-dev-server -D
+```
+
+Then add this to the top-level in webpack.config.js:
+
+```js
+devServer: {
+  contentBase: path.resolve(__dirname, 'public')
+},
+```
+
+### Running Webpack Development Server
+
+```shell
+$ yarn webpack-dev-server --mode development
+```
+
+## Components
+
+### Hello World
+
+/public/index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReactJS</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="bundle.js"></script>
+</body>
+</html>
+```
+
+```js
+import React from 'react';
+import { render } from 'react-dom';
+
+render(
+    <h1>Hello World</h1>, 
+    document.getElementById('app')
+);
+```
