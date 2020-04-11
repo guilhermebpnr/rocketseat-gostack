@@ -46,7 +46,12 @@ Immersive training in Node.js, React and React Native.
     - [Installing Webpack Development Server](#installing-webpack-development-server)
     - [Running Webpack Development Server](#running-webpack-development-server)
   - [Components](#components)
-    - [Hello World](#hello-world)
+    - [JSX Hello World](#jsx-hello-world)
+    - [Component Hello World](#component-hello-world)
+    - [Basic Component](#basic-component)
+    - [Fragments](#fragments)
+    - [Properties](#properties)
+  - [Useful VSCode Configurations](#useful-vscode-configurations)
 
 # Getting started
 
@@ -511,7 +516,9 @@ $ yarn webpack-dev-server --mode development
 
 ## Components
 
-### Hello World
+In ReactJS, a component is a function that returns JSX.
+
+### JSX Hello World
 
 /public/index.html
 
@@ -530,12 +537,143 @@ $ yarn webpack-dev-server --mode development
 </html>
 ```
 
+index.js
+
 ```js
 import React from 'react';
 import { render } from 'react-dom';
 
 render(
-    <h1>Hello World</h1>, 
+    <h1>Hello World</h1>, // JSX
     document.getElementById('app')
 );
+```
+
+### Component Hello World
+
+/public/index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReactJS</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="bundle.js"></script>
+</body>
+</html>
+```
+
+App.js
+
+```js
+import React from 'react';
+
+export default function App() {
+    return <h1>Hello People</h1>; //JSX
+}
+```
+
+index.js
+
+```js
+import React from 'react';
+import { render } from 'react-dom';
+
+import App from './App';
+
+render(
+    <App />, 
+    document.getElementById('app')
+);
+```
+
+### Basic Component
+
+/components/Header.js
+
+```js
+import React from 'react';
+
+export default function Header() {
+    return (
+        <header>
+            <h1>Component Hello World</h1>
+        </header>
+    );
+}
+```
+
+App.js
+
+```js
+import React from 'react';
+
+import Header from './components/Header';
+
+export default function App() {
+    return <Header />;
+}
+```
+
+### Fragments
+
+A fragment is an XML tag with no name. It is not rendered in the final HMTL document and can be used to nest multiple, same-level components.
+
+```js
+export default function MyComponent() {
+  return (
+    <>                      // <- Fragment tag
+      <Component1 />
+      <Component2 />
+    </>
+  );
+}
+```
+
+### Properties
+
+Properties can be passed inside JSX to be rendered in a component.
+
+App.js
+
+```js
+function App() {
+  return (
+    <MyComponent myProperty="myValue"/>
+    <MyComponent>
+      <span class="a-child-tag">
+        Some content.
+      </span>
+    </MyComponent>
+  );
+}
+```
+
+MyComponent.js
+
+```js
+function MyComponent(props) {
+  return (
+    <div>
+      {properties.myProperty}
+      {properties.children}
+    </div>
+  );
+}
+```
+
+
+
+
+
+## Useful VSCode Configurations
+
+```json
+"emmet.syntaxProfiles": { "javascript": "jsx" },
+"emmet.includeLanguages": { "javascript": "javascriptreact" },
 ```
