@@ -51,7 +51,11 @@ Immersive training in Node.js, React and React Native.
     - [Basic Component](#basic-component)
     - [Fragments](#fragments)
     - [Properties](#properties)
+    - [State Variables](#state-variables)
   - [Useful VSCode Configurations](#useful-vscode-configurations)
+  - [Importing CSS and Images](#importing-css-and-images)
+  - [Handling files](#handling-files)
+  - [Additional configurations](#additional-configurations)
 
 # Getting started
 
@@ -667,13 +671,87 @@ function MyComponent(props) {
 }
 ```
 
+### State Variables
 
+If I wanna have something showing on my screen and then be able to change it, I need to use a state variable.
 
+#### Declaring it
 
+```js
+import { useState } from 'react';
+...
+  const [myStateVar, setMyStateVar] = useState(valid_initial_value);
+...
+```
+
+#### Changing its value
+
+```js
+setMyStateVar(new_value);
+```
+
+It can then be used on the app like any traditional variable.
 
 ## Useful VSCode Configurations
 
 ```json
 "emmet.syntaxProfiles": { "javascript": "jsx" },
 "emmet.includeLanguages": { "javascript": "javascriptreact" },
+```
+
+## Importing CSS and Images
+
+```shell
+$ yarn add css-loader style-loader
+```
+
+webpack.config.js
+
+```js
+module: {
+  rules: {
+    {
+      test: /\.css$/,
+      exclude: /node_modules/,
+      use: [
+        { loader: 'css-loader'},
+        { loader: 'style-loader'},
+      ]
+    }y
+  }
+}
+```
+
+## Handling files
+
+```shell
+$ yarn add file-loader
+```
+
+webpack.config.js
+
+```js
+module: {
+  rules: [
+    {
+      test: /.*\.(gif|png|jpe?g)$/i,
+      use: { loader: 'file-loader' }
+    },
+  ]
+},
+```
+
+
+
+
+
+## Additional configurations
+
+package.json
+
+```json
+"scripts": {
+  "dev": "webpack-dev-server --mode development",
+  "build": "webpack --mode production"
+},
 ```

@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 
+import './App.css';
+import backgroundImage from './assets/background.jpeg';
+
 import Header from './components/Header';
 
 export default function App() {
@@ -13,6 +16,8 @@ export default function App() {
     return (
         <>
             <Header title="My React App" />
+
+            <img src={backgroundImage} width="800"/>
 
             <ul>
                 {projects.map(project => <li key={project}>{project}</li>)}
