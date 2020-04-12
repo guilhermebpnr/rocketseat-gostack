@@ -55,6 +55,12 @@ Immersive training in Node.js, React and React Native.
   - [Useful VSCode Configurations](#useful-vscode-configurations)
   - [Importing CSS and Images](#importing-css-and-images)
   - [Handling files](#handling-files)
+  - [Fetching data from the API](#fetching-data-from-the-api)
+    - [Axios](#axios)
+    - [Backend: Cors](#backend-cors)
+    - [useEffect](#useeffect)
+    - [Fetching the data](#fetching-the-data)
+  - [Posting data to the API](#posting-data-to-the-api)
   - [Additional configurations](#additional-configurations)
 
 # Getting started
@@ -741,9 +747,85 @@ module: {
 },
 ```
 
+## Fetching data from the API
 
+### Axios
 
+Axios will allow us to access the API though the HTTP methods.
 
+```shell
+$ yarn add axios
+```
+
+/services/api.js
+
+```js
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'http://localhost:3333'
+});
+
+export default api;
+```
+
+### Backend: Cors
+
+The Cors module must be added to the backend app to allow consumers to access the API.
+
+```shell
+$ yarn add cors
+```
+
+index.js
+
+```js
+const cors = require('cors');
+...
+app.use(cors());
+```
+
+### useEffect
+
+Fires a function as soon as the component is shown, or as soon as a determinate data are changed.
+
+### Fetching the data
+
+```js
+useEffect(() => {
+        api.get('projects').then(response => {
+            setProjects(response.data);
+        });
+    }, []);
+```
+
+## Posting data to the API
+
+We add this for handling async methods.
+
+```shell
+$ yarn add @babel/plugin-transform-runtime -D
+```
+
+babel.config.js
+
+```js
+plugins: [
+  '@babel/plugin-transform-runtime'
+]
+```
+
+Now we can post the information using Axio's *post* method inside an asynchronous function.
+
+```js
+async function handleAddProject() {
+  const response = await api.post('projects', {
+    title: 'Title',
+    owner: 'Owner'
+  });
+  setProjects([...projects, response.data]);
+}
+```
 
 ## Additional configurations
 
