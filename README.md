@@ -62,6 +62,10 @@ Immersive training in Node.js, React and React Native.
     - [Fetching the data](#fetching-the-data)
   - [Posting data to the API](#posting-data-to-the-api)
   - [Additional configurations](#additional-configurations)
+- [Level 1.3 - Mobile App with React Native](#level-13---mobile-app-with-react-native)
+  - [Setting up the SDK](#setting-up-the-sdk)
+  - [Initializing project](#initializing-project)
+  - [Running on Mac](#running-on-mac)
 
 # Getting started
 
@@ -837,3 +841,22 @@ package.json
   "build": "webpack --mode production"
 },
 ```
+
+# Level 1.3 - Mobile App with React Native
+
+## Setting up the SDK
+
+https://react-native.rocketseat.dev/
+
+## Initializing project
+
+```shell
+$ react-native init dir_name
+$ cd dir_name/ios
+$ pod install
+```
+
+## Running on Mac
+
+```shell
+$ react-native run-ios --simulator "iPhone 11 Pro Max"
