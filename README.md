@@ -66,6 +66,13 @@ Immersive training in Node.js, React and React Native.
   - [Setting up the SDK](#setting-up-the-sdk)
   - [Initializing project](#initializing-project)
   - [Running on Mac](#running-on-mac)
+  - [Hello World App](#hello-world-app)
+  - [React Native Tags](#react-native-tags)
+  - [Accessing the API](#accessing-the-api)
+    - [Using Axios](#using-axios)
+    - [Which IP should I use to connect to the device/emulator?](#which-ip-should-i-use-to-connect-to-the-deviceemulator)
+    - [FlatList Example](#flatlist-example)
+    - [TouchableOpacity Example](#touchableopacity-example)
 
 # Getting started
 
@@ -860,4 +867,97 @@ $ pod install
 
 ```shell
 $ react-native run-ios --simulator "iPhone 11 Pro Max"
+```
+
+## Hello World App
+
+index.js
+
+```js
+import App from './src';
+```
+
+/src/index.js
+
+```js
+import React from 'react';
+import { View, Text, StyleSheet, StatusBar } from 'react-native';
+
+export default function App() {
+    return (
+        <>
+            <StatusBar barStyle='light-content' backgroundColor='#222' />
+            <View style={styles.container}>
+                <Text style={styles.title}>Hello my world!</Text>
+            </View>
+        </>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#222',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    title: {
+        color: '#fff',
+        fontSize: 32,
+        fontWeight: 'bold',
+    },
+});
+```
+
+## React Native Tags
+
+- <></>
+- View
+- SafeAreaView
+- Text
+- ScrollText
+- FlatList
+- StatusBar
+- TouchableOpacity
+
+## Accessing the API
+
+### Using Axios
+
+```js
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'http://my_ip:3333',
+});
+```
+
+### Which IP should I use to connect to the device/emulator?
+
+- iOS emulator: localhost
+- iOS device: computer's IP
+- Android emulator with adb reverse: localhost
+- Androd Studio emulator: 10.0.2.2
+- Android Genymotion emulator: 10.0.3.2
+- Android device: computer's IP
+
+### FlatList Example
+
+```js
+<FlatList
+  style={styles.container}
+  data={projects}
+  keyExtractor={project => project.id}
+  renderItem={({ item: project }) => (
+    <Text style={styles.project}>{project.title}</Text>
+  )}
+/>
+```
+
+### TouchableOpacity Example
+
+```js
+<TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={handleAddProject}>
+  <Text style={styles.buttonText}>Add Project</Text>
+</TouchableOpacity>
 ```
