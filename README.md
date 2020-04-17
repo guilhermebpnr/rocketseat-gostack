@@ -861,6 +861,7 @@ https://react-native.rocketseat.dev/
 $ react-native init dir_name
 $ cd dir_name/ios
 $ pod install
+$ cd ..
 ```
 
 ## Running on Mac
