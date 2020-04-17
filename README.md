@@ -1,7 +1,8 @@
+###### <span id="top">[go to bottom ⇣](#bottom)</span>
+
 # Rocketseat GoStack Bootcamp
 
 Immersive training in Node.js, React and React Native.
-
 
 **Table of Contents**
 - [Rocketseat GoStack Bootcamp](#rocketseat-gostack-bootcamp)
@@ -73,6 +74,7 @@ Immersive training in Node.js, React and React Native.
     - [Which IP should I use to connect to the device/emulator?](#which-ip-should-i-use-to-connect-to-the-deviceemulator)
     - [FlatList Example](#flatlist-example)
     - [TouchableOpacity Example](#touchableopacity-example)
+- [Typescript](#typescript)
 
 # Getting started
 
@@ -962,3 +964,11 @@ const api = axios.create({
   <Text style={styles.buttonText}>Add Project</Text>
 </TouchableOpacity>
 ```
+
+# Typescript
+
+
+
+
+
+###### <span id="bottom">[go to top ⇡](#top)</span>
