@@ -84,6 +84,8 @@ Immersive training in Node.js, React and React Native.
   - [Structure and Patterns](#structure-and-patterns)
     - [Setting up the structure](#setting-up-the-structure)
     - [.editorconfig](#editorconfig)
+    - [ESLint](#eslint)
+    - [Importing Typescript files](#importing-typescript-files)
 
 # Getting started
 
@@ -1142,5 +1144,45 @@ Install the extension and then:
     trim_trailing_whitespace = true
     insert_final_newline = true
     ```
+
+### ESLint
+
+```shell
+yarn add eslint -D
+yarn eslint --init
+```
+
+Don't forget to install the packages suggested at the end of the init script.
+
+Also, install the VSCode ESLint extension.
+
+Tip: the project folder should be a "root" folder in the workspace, in order for ESLint to work.
+
+### Importing Typescript files
+
+```shell
+yarn add eslint-import-resolver-typescript
+```
+
+.eslintrc.json
+
+```json
+"rules": {
+    "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+            "ts": "never"
+        }
+    ]
+},
+"settings": {
+    "import/resolver": {
+        "typescript": {}
+    }
+}
+```
+
+
 
 ###### <span id="bottom">[go to top ⇡](#top)</span>
