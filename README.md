@@ -75,6 +75,15 @@ Immersive training in Node.js, React and React Native.
     - [FlatList Example](#flatlist-example)
     - [TouchableOpacity Example](#touchableopacity-example)
 - [Typescript](#typescript)
+  - [Setting up a Node.js project](#setting-up-a-nodejs-project)
+  - [Node.js Hello World app](#nodejs-hello-world-app)
+  - [Running the app](#running-the-app)
+  - [Hello World using types](#hello-world-using-types)
+  - [Interfaces](#interfaces)
+- [First project using Node.js](#first-project-using-nodejs)
+  - [Structure and Patterns](#structure-and-patterns)
+    - [Setting up the structure](#setting-up-the-structure)
+    - [.editorconfig](#editorconfig)
 
 # Getting started
 
@@ -967,8 +976,171 @@ const api = axios.create({
 
 # Typescript
 
+## Setting up a Node.js project
 
+```shell
+yarn init -y
+yarn add typescript -d
+yarn add express
+yarn add @types/express -D
+yarn tsc --init
+```
 
+tsconfig.json
 
+```json
+"outDir": "./dist",
+```
+
+## Node.js Hello World app
+
+/src/index.ts
+
+```typescript
+import express from 'express';
+
+const app = express();
+
+app.get('/', (request, response) => response.json({
+    message: 'Hello world =/',
+}));
+
+app.listen(3333);
+```
+
+## Running the app
+
+```shell
+yarn tsc
+node dist/index.js
+```
+
+## Hello World using types
+
+index.ts
+
+```ts
+import express from 'express';
+import { helloWorld as helloWorld } from './routes';
+
+const app = express();
+
+app.get('/', helloWorld);
+
+app.listen(3333);
+```
+
+routes.ts
+
+```ts
+import { Request, Response } from 'express';
+
+export function helloWorld(request: Request, response: Response) {
+    return response.json({
+        message: 'Hello world',
+    });
+}
+```
+
+## Interfaces
+
+/services/CreateUser.ts
+
+```ts
+interface TechObject {
+    title: string;
+    experience: number;
+}
+
+interface CreateUserData {
+    name?: string;
+    email: string;
+    password: string;
+    techs: Array<string | TechObject>;
+    // techs: String[]
+}
+
+export default function createUser({ name, email, password }: CreateUserData) {
+    const user = {
+        name,
+        email,
+        password,
+    };
+    return user;
+}
+```
+
+routes.ts
+
+```ts
+import { Request, Response } from 'express';
+import createUser from './services/CreateUser';
+
+export function helloWorld(request: Request, response: Response) {
+    const user = createUser({
+        email: 'me@email.com',
+        password: '123456',
+        techs: [
+            'Node.js', 
+            'React', 
+            {title: 'Typescript', experience: 100}],
+    });
+
+    return response.json({ message: 'Hello World' })
+}
+```
+
+# First project using Node.js
+
+## Structure and Patterns
+
+### Setting up the structure
+
+```shell
+yarn init -y
+yarn add express
+yarn add typescript -D
+yarn tsc --init
+yarn add @types/typescript -D
+```
+
+tsconfig.json
+
+```json
+"outDir": "./dist",
+"rootDir": "./src",
+```
+
+```shell
+yarn tsc
+node dist/server.js
+```
+
+#### Setting up a dev server
+
+```shell
+yarn add ts-node-dev -D
+```
+
+package.json
+```json
+"scripts": {
+  "dev:server": "ts-node-server --transpileOnly --ignore-watch node_modules src/server.ts"
+}
+```
+
+### .editorconfig
+
+Install the extension and then:
+
+1. Generate the config file by right-clicking the project tree and selecting the corresponding option
+
+2. Add some config:
+    
+    ```
+    end_of_line = lf
+    trim_trailing_whitespace = true
+    insert_final_newline = true
+    ```
 
 ###### <span id="bottom">[go to top ⇡](#top)</span>
