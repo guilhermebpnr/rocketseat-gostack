@@ -86,6 +86,8 @@ Immersive training in Node.js, React and React Native.
     - [.editorconfig](#editorconfig)
     - [ESLint](#eslint)
     - [Importing Typescript files](#importing-typescript-files)
+    - [Prettier](#prettier)
+    - [Debugging](#debugging)
 
 # Getting started
 
@@ -1183,6 +1185,85 @@ yarn add eslint-import-resolver-typescript
 }
 ```
 
+### Prettier
 
+```shell
+yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
+```
+
+.eslintrc.json
+
+```json
+"extends": [
+  "plugin:@typescript-eslint/recommended",
+  "prettier/@typescript-eslint",
+  "plugin:prettier/recommended"
+],
+"plugins": [
+  "prettier"
+],
+"rules": {
+  "prettier/prettier": "error"
+}
+```
+
+prettier.config.js
+
+```js
+module.exports = {
+    singleQuote: true,
+    trailingComma: 'all',
+    arrowParens: 'avoid',
+};
+```
+
+.eslintignore
+
+```
+/*.js
+node_modules
+dist
+```
+
+### Debugging
+
+1. Change the dev server launch config in _package.json_ to:
+    ```json
+    "scripts": {
+      "dev:server": "ts-node-dev --inspect --transpileOnly --ignore-watch node_modules src/server.ts"
+    },
+    ```
+
+2. Create a new debug config with the following specs in _launch.json_:
+    ```json
+    {
+      // Use IntelliSense to learn about possible attributes.
+      // Hover to view descriptions of existing attributes.
+      // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+      "version": "0.2.0",
+      "configurations": [
+        {
+            "type": "node",
+            "request": "attach",
+            "protocol": "inspector",
+            "restart": true,
+            "name": "Debug",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        }
+      ]
+    }
+    ```
+
+3. Launch the dev server:
+    ```shell
+    yarn dev:server
+    ```
+
+4. Insert your breakpoints.
 
 ###### <span id="bottom">[go to top ⇡](#top)</span>
