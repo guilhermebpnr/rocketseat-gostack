@@ -1156,7 +1156,30 @@ yarn eslint --init
 
 Don't forget to install the packages suggested at the end of the init script.
 
-Also, install the VSCode ESLint extension.
+Also, install the VSCode ESLint extension and add the following configurations to the settings:
+
+```json
+"[javascript]": {
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
+},
+"[javascriptreact]": {
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
+},
+"[typescript]": {
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
+},
+"[typescriptreact]": {
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
+},
+```
 
 Tip: the project folder should be a "root" folder in the workspace, in order for ESLint to work.
 
