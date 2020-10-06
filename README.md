@@ -1129,7 +1129,7 @@ yarn add ts-node-dev -D
 package.json
 ```json
 "scripts": {
-  "dev:server": "ts-node-server --transpileOnly --ignore-watch node_modules src/server.ts"
+  "dev:server": "ts-node-dev --transpileOnly --ignore-watch node_modules src/server.ts"
 }
 ```
 
